@@ -10,8 +10,8 @@ def introspection_info(obj):
 class SomeСlass:
     def __init__(self):
         self.name = 'SomeClass'
-        self.description = 4
-        self.attributes = 30
+        self.description = 100
+        self.attributes = 1000
 
 obj = SomeСlass()
 
