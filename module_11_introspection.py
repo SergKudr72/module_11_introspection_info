@@ -1,20 +1,35 @@
-from inspect import getmodule
-
-
 def introspection_info(obj):
-    return {'type': type(obj).__name__,
-        'attributes': obj.__dict__,
-        'methods': dir(obj),
-        'module': getmodule(obj)}
+    obj_type = type(obj).__name__
+    attributes = dir(obj)
+    methods = [method for method in attributes if callable(getattr(obj, method))]
+    module = obj.__class__.__module__
 
-class SomeСlass:
+    introsp_info = {'type': obj_type, 'attributes': attributes,
+                    'methods': methods, 'module': module}
+
+    return introsp_info
+
+
+class Myclass:
     def __init__(self):
-        self.name = 'SomeClass'
+        self.name = 'Myclass'
         self.description = 100
         self.attributes = 1000
 
-obj = SomeСlass()
+obj = Myclass()
 
+class_info = introspection_info(obj) # класс
+print(class_info)
 
-number_info = introspection_info(obj)
+number_info = introspection_info(58) # число
 print(number_info)
+
+string_info = introspection_info('Urban') # строка
+print(string_info)
+
+list_info = introspection_info([1, 20, 4.0, 'word']) # список
+print(list_info)
+
+tuple_info = introspection_info((1, 5, 23, 'doc')) # кортеж
+print(tuple_info)
+
