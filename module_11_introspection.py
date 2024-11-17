@@ -1,10 +1,11 @@
 def introspection_info(obj):
     obj_type = type(obj).__name__
     attributes = dir(obj)
+    attrs = [attr for attr in attributes if not callable(getattr(obj, attr))]
     methods = [method for method in attributes if callable(getattr(obj, method))]
     module = obj.__class__.__module__
 
-    introsp_info = {'type': obj_type, 'attributes': attributes,
+    introsp_info = {'type': obj_type, 'attributes': attrs,
                     'methods': methods, 'module': module}
 
     return introsp_info
@@ -15,6 +16,9 @@ class Myclass:
         self.name = 'Myclass'
         self.description = 100
         self.attributes = 1000
+
+    def my_method(self):
+        pass
 
 obj = Myclass()
 
